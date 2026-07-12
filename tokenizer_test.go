@@ -67,6 +67,8 @@ func TestTokenize(t *testing.T) {
 			{2.3e-4, Token{key: TokenFloat, value: []byte("2.3e-4")}},
 			{2.3e+4, Token{key: TokenFloat, value: []byte("2.3E+4")}},
 			{2e4, Token{key: TokenFloat, value: []byte("2e4")}},
+			{1.e5, Token{key: TokenFloat, value: []byte("1.e5")}},  // https://github.com/bzick/tokenizer/pull/43
+			{10.E3, Token{key: TokenFloat, value: []byte("10.E3")}}, // exponent right after the dot must stay a single float
 		}
 		for _, v := range floats {
 			t.Run(string(v.token.value), func(t *testing.T) {
